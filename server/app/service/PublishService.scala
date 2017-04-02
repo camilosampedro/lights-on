@@ -11,13 +11,15 @@ import scala.util.{Failure, Success, Try}
   * PublishService
   */
 object PublishService {
+  val client = new MqttClient(brokerUrl, MqttClient.generateClientId(), persistence)
   def publish(message: String): Boolean = {
-    Try(client.getTopic(topic)) match {
+    client.connect()
+    val result = Try(client.getTopic(topic+"/set")) match {
       case Success(messageTopic) =>
         val mqttMessage = new MqttMessage(message.getBytes("utf-8"))
         Try(messageTopic.publish(mqttMessage)) match {
-          case Success(result) =>
-            play.Logger.debug(s"Result of publishing: $result")
+          case Success(r) =>
+            play.Logger.debug(s"Result of publishing: ${r.getMessage}")
             true
           case Failure(exception) =>
 
@@ -33,6 +35,7 @@ object PublishService {
          """.stripMargin, exception)
         false
     }
-
+    client.disconnect()
+    result
   }
 }

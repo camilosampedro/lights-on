@@ -15,8 +15,8 @@ class LightSocketActor(out: ActorRef) extends Actor {
   override def receive: Receive = {
     case message: Message =>
       play.Logger.debug(s"Message: ${message.information}")
-      PublishService.publish("true")
-      out ! message
+      PublishService.publish(message.information)
+      // out ! message
   }
 }
 

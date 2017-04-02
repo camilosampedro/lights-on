@@ -10,10 +10,13 @@ lazy val server = (project in file("server")).settings(
   libraryDependencies ++= Seq(
     "com.vmunier" %% "scalajs-scripts" % "1.0.0",
     "org.eclipse.paho" % "org.eclipse.paho.client.mqttv3" % "1.1.1",
+    "com.github.benhutchison" %% "prickle" % "1.1.13",
     specs2 % Test
   ),
   // Compile the project before generating Eclipse files, so that generated .scala or .class files for views and routes are present
   EclipseKeys.preTasks := Seq(compile in Compile)
+
+
 ).enablePlugins(PlayScala).
   dependsOn(sharedJvm)
 
@@ -23,9 +26,12 @@ lazy val client = (project in file("client")).settings(
   persistLauncher in Test := false,
   libraryDependencies ++= Seq(
     "org.scala-js" %%% "scalajs-dom" % "0.9.1",
-    "be.doeraene" %%% "scalajs-jquery" % "0.9.1"
+    "be.doeraene" %%% "scalajs-jquery" % "0.9.1",
+    "com.github.benhutchison" %%% "prickle" % "1.1.13"
   ),
-  jsDependencies += "org.webjars" % "jquery" % "2.1.3" / "2.1.3/jquery.js"
+  jsDependencies += "org.webjars" % "jquery" % "2.1.3" / "2.1.3/jquery.js",
+
+  libraryDependencies += "be.doeraene" %%% "scalajs-jquery" % "0.9.1"
 ).enablePlugins(ScalaJSPlugin, ScalaJSWeb).
   dependsOn(sharedJs)
 

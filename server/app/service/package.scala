@@ -7,6 +7,6 @@ import org.eclipse.paho.client.mqttv3.persist.{MemoryPersistence, MqttDefaultFil
 package object service {
   val persistence = new MemoryPersistence // MqttDefaultFilePersistence("/tmp")
   val brokerUrl: String = "tcp://localhost:1883"
-  val client = new MqttClient(brokerUrl, MqttClient.generateClientId(), persistence)
-  val topic = "/homie/lucecilla/light"
+
+  val topic = "homie/lucecilla/light/on"
 }
