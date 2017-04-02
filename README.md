@@ -2,10 +2,16 @@
 
 This project uses a websocket server to listen to _"turn light"_ events and let anyone who is subscribed to the websocket to know when the light state has changed
 
+## Preconditions
+ - A mosquitto server running on localhost:1883.
+
 ## How to run
 1. Clone this repository: `git clone https://github.com/camilosampedro/lights-on.git`
 2. Go to the cloned location: `cd lights-on`
 3. Run the server: `sbt run`
+4. In your browser go to [localhost:9000](localhost:9000).
+
+![Screenshot](https://github.com/camilosampedro/lights-on/raw/master/screenshots/screenshot.png)
 
 ## Technologies
 
